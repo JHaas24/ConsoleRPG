@@ -1,0 +1,7 @@
+C:\Users\DSU\source\repos\RPG Sim\RPG Sim\bin\Debug\RPG Sim.exe.config
+C:\Users\DSU\source\repos\RPG Sim\RPG Sim\bin\Debug\RPG Sim.exe
+C:\Users\DSU\source\repos\RPG Sim\RPG Sim\bin\Debug\RPG Sim.pdb
+C:\Users\DSU\source\repos\RPG Sim\RPG Sim\obj\Debug\RPG Sim.csprojAssemblyReference.cache
+C:\Users\DSU\source\repos\RPG Sim\RPG Sim\obj\Debug\RPG Sim.csproj.CoreCompileInputs.cache
+C:\Users\DSU\source\repos\RPG Sim\RPG Sim\obj\Debug\RPG Sim.exe
+C:\Users\DSU\source\repos\RPG Sim\RPG Sim\obj\Debug\RPG Sim.pdb

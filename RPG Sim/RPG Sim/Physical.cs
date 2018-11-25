@@ -6,18 +6,19 @@ namespace RPG_Sim
 {
     public class Physical : Weapon
     {
-        int _sharpness;
-        String _name;
-        String _verb;
-        int _dmg;
-        double _critChance;
+        private int _sharpness;
+        private String _name;
+        private String _verb;
+        private int _dmg;
+        private double _critChance;
 
-        public Physical(int sharpness, String name, String verb, int dmg, double critChance, char type) : base(name, verb, dmg, critChance, type)
+        public Physical(String name, String verb, int dmg, double critChance, char type) : base(name, verb, dmg, critChance, type)
         {
-            this._sharpness = sharpness;
+            _sharpness = 100;
             this._name = name;
             this._verb = verb;
             this._critChance = critChance;
+            this.Type = type;
         }
 
         public int Sharpness

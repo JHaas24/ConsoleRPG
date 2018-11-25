@@ -79,7 +79,7 @@ namespace RPG_Sim
                 _type = value;
             }
         }
-        //Create Weapons Here ^-^ or not *-*
+        
 
     }
 }

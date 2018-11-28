@@ -17,9 +17,14 @@ namespace RPG_Sim
         private int _xCoord = -1;
         private int _yCoord = -1;
 
-        private static Fighter[] _fighters = new Fighter[20];
-        private static int _numOfFighters = 4;
+        
 
+       
+
+        public Fighter()
+        {
+
+        }
         public Fighter(String name, int hp, int level, Weapon weapon, int attStat, int defStat, String icon, int xCoord, int yCoord)
         {
             this._name = name;
@@ -48,29 +53,7 @@ namespace RPG_Sim
             Console.WriteLine("Fighter Information:");
         }
 
-        public static Fighter[] Fighters
-        {
-            get
-            {
-                return _fighters;
-            }
-            set
-            {
-                _fighters = value;
-            }
-        }
-
-         public static int NumOfFighters
-         {
-            get
-            {
-                return _numOfFighters;
-            }
-            set
-            {
-                _numOfFighters = value;
-            }
-        }
+        
 
         public int XCoord
         {

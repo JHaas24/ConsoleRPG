@@ -7,7 +7,9 @@ namespace RPG_Sim
     public class Overworld
     {
         private int _mapSize;
-        private static String[,] _map;
+        private String[,] _map;
+        public Fighter[] _fighters = new Fighter[20];
+        private int _numOfFighters = 4;
 
         public Overworld(int mapSize)
         {
@@ -15,7 +17,7 @@ namespace RPG_Sim
             _map = new String[mapSize, mapSize];
         }
 
-        public static String[,] Map
+        public String[,] Map
         {
             get { return _map; }
             set { _map = value; }      
@@ -27,17 +29,36 @@ namespace RPG_Sim
             set { _mapSize = value; }
         }
 
+        public Fighter[] Fighters
+        {
+            get { return _fighters; }
+            set { _fighters = value; }
+        }
+
+        public int NumOfFighters
+        {
+            get { return _numOfFighters; }
+            set { _numOfFighters = value; }
+        }
+
         public void Welcome()
         {
             Console.Out.WriteLine("Welcome to RPG Sim!!! ");
             Console.Out.WriteLine("What is your name???");
 
-            Fighter.Fighters[0].Name = Console.In.ReadLine();
-            Console.Out.WriteLine("Welcome " + Fighter.Fighters[0].Name + "!");
-            Console.Out.WriteLine("Choose your map icon. (up to five characters long) ex: (*.*)");
+            Fighters[0].Name = Console.In.ReadLine();
+            Console.Out.WriteLine("Welcome " + Fighters[0].Name + "!");
+            Console.Out.WriteLine("Choose your map icon. (one to five characters long) ex: (*.*)");
+            Fighters[0].Icon = Console.In.ReadLine();
+            while (Fighters[0].Icon.Length > 5 || Fighters[0].Icon.Length < 1)
+            {                
+                Console.Out.WriteLine("Icon should be one to five characters long...");
+                Fighters[0].Icon = Console.In.ReadLine();
+            }
+            while (Fighters[0].Icon.Length != 5)
+                Fighters[0].Icon += " ";
 
-            Fighter.Fighters[0].Icon = Console.In.ReadLine();
-            Console.Out.WriteLine("Alright " + Fighter.Fighters[0].Name + "! Welcome to the battle royale! (press enter)");
+            Console.Out.WriteLine("Alright " + Fighters[0].Name + "! Welcome to the battle royale! (press enter)");
             Console.In.ReadLine();
         }
 
@@ -49,12 +70,11 @@ namespace RPG_Sim
                 for(int j = 0; j < MapSize; j++)
                 {
                     Map[i,j] = "[     ]";
-                    for (int k = 0; k < Fighter.NumOfFighters; k++)
+                    for (int k = 0; k < NumOfFighters; k++)
                     {
-                        if (Fighter.Fighters[k].XCoord == i && Fighter.Fighters[k].YCoord == j)
+                        if (Fighters[k].XCoord == i && Fighters[k].YCoord == j)
                         {
-                            Map[i, j] = "[" + Fighter.Fighters[k].Icon + "]";
-                            Console.Out.WriteLine(Fighter.Fighters[k].XCoord +", " + Fighter.Fighters[k].YCoord);
+                            Map[i, j] = "[" + Fighters[k].Icon + "]";
                         }
                     }
                     Console.Out.Write(Map[i,j]);
@@ -69,10 +89,10 @@ namespace RPG_Sim
             {
                 for(int j = 0; j < MapSize; j++)
                 {
-                    for(int k = 0; k < Fighter.NumOfFighters; k++)
+                    for(int k = 0; k < NumOfFighters; k++)
                     {
-                        if (Fighter.Fighters[k].XCoord == i && Fighter.Fighters[k].YCoord == j)
-                            Map[i,j] = Fighter.Fighters[k].Icon;
+                        if (Fighters[k].XCoord == i && Fighters[k].YCoord == j)
+                            Map[i,j] = Fighters[k].Icon;
                     }
                 }
             }

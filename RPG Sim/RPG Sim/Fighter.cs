@@ -12,8 +12,20 @@ namespace RPG_Sim
         private Weapon _weapon;
         private int _atkStat;
         private int _defStat;
+        private String _icon;
 
-        public Fighter(String name, int hp, int level, Weapon weapon, int attStat, int defStat)
+        private int _xCoord = -1;
+        private int _yCoord = -1;
+
+        
+
+       
+
+        public Fighter()
+        {
+
+        }
+        public Fighter(String name, int hp, int level, Weapon weapon, int attStat, int defStat, String icon, int xCoord, int yCoord)
         {
             this._name = name;
             this._hp = hp;
@@ -21,6 +33,9 @@ namespace RPG_Sim
             this._weapon = weapon;
             this._atkStat = attStat;
             this._defStat = defStat;
+            this._icon = icon;
+            this._xCoord = xCoord;
+            this._yCoord = yCoord;
         }
 
         
@@ -38,6 +53,43 @@ namespace RPG_Sim
             Console.WriteLine("Fighter Information:");
         }
 
+        
+
+        public int XCoord
+        {
+            get
+            {
+                return _xCoord;
+            }
+            set
+            {
+                _xCoord = value;
+            }
+        }
+
+        public int YCoord
+        {
+            get
+            {
+                return _yCoord;
+            }
+            set
+            {
+                _yCoord = value;
+            }
+        }
+
+        public String Icon
+        {
+            get
+            {
+                return _icon;
+            }
+            set
+            {
+                _icon = value;
+            }
+        }
 
         public String Name
         {

@@ -57,9 +57,11 @@ namespace RPG_Sim
                 if (done == "q")
                     break;
 
-                bool test;
-                test = world.CheckForBattle();
-                Console.WriteLine(test);
+                int fighterIndex = world.CheckForBattle();
+                if (fighterIndex != 0)
+                {
+                    world.DisplayStat(fighterIndex);
+                }
             }
         }
     }

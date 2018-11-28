@@ -70,7 +70,7 @@ namespace RPG_Sim
                 for(int j = 0; j < MapSize; j++)
                 {
                     Map[i,j] = "[     ]";
-                    for (int k = 0; k < NumOfFighters; k++)
+                    for (int k = NumOfFighters- 1; k >= 0; k--)
                     {
                         if (Fighters[k].XCoord == j && Fighters[k].YCoord == i)
                         {
@@ -83,22 +83,7 @@ namespace RPG_Sim
                 Console.Out.WriteLine();
             }
         }
-        /*
-        public void addFighters()
-        {
-            for(int j = 0; j < MapSize; j++)
-            {
-                for(int i = 0; i < MapSize; i++)
-                {
-                    for(int k = 0; k < NumOfFighters; k++)
-                    {
-                        if (Fighters[k].XCoord == i && Fighters[k].YCoord == j)
-                            Map[i,j] = Fighters[k].Icon;
-                    }
-                }
-            }
-        }
-        */
+      
         public String Walk()
         {
             String move = "";
@@ -131,29 +116,49 @@ namespace RPG_Sim
             DrawMap();
             return move;
         }
-
-        public bool CheckForBattle()
+        //return index of fighter player is on
+        //0 means no fighter found
+        public int CheckForBattle()
         {
             Fighter player = Fighters[0];
             for(int i = 1; i < NumOfFighters; i++)
             {
                 if (player.XCoord == Fighters[i].XCoord && player.YCoord == Fighters[i].YCoord)
                 {
-                    return true;
+                    return i;
                 }
             }
-            return false;
+            return 0;
+        }
 
+        /*
+        Display all of these:
+
+        private String _name;
+        private int _hp;
+        private int _level;
+        private Weapon _weapon;
+        private int _atkStat;
+        private int _defStat;
+        */
+        //Only called when player is on an enemy
+        public void DisplayStat(int index)
+        {
+            Fighter player = Fighters[0];
+            Fighter enemy =  Fighters[index];
+
+            Console.WriteLine("          <---" + player.Name + " VS " + enemy.Name + "--->");
+            Console.WriteLine("___________________________________________");
+            Console.WriteLine("Level:   " + player.Level + "|" + enemy.Level);
+            Console.WriteLine("HP:      " + player.Hp + "|" + enemy.Hp);
+            Console.WriteLine("Weapon:  " + player.Weapon.Name + "|" + enemy.Weapon.Name);
+            Console.WriteLine("Attack:  " + player.AtkStat + "|" + enemy.AtkStat);
+            Console.WriteLine("Defense: " + player.DefStat + "|" + enemy.DefStat);
         }
 
         public Fighter[] StartBattle()
         {
             throw new NotImplementedException();
-        }
-
-        public void DisplayStat(Fighter f)
-        {
-            throw new NotImplementedException();
-        }
+        }       
     }
 }

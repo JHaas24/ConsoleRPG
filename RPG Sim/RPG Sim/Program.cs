@@ -50,12 +50,11 @@ namespace RPG_Sim
             //loop game
             String done; 
             Console.Out.WriteLine("Move your character with a WASD key and hit enter to confirm");
+            Console.Out.WriteLine("Press h for tips");
             Console.Out.WriteLine("Press q to quit");
             while (true)
             {
-                done = world.Walk();
-                if (done == "q")
-                    break;
+                world.Walk();
 
                 int fighterIndex = world.CheckForBattle();
                 if (fighterIndex != 0)

@@ -83,6 +83,14 @@ namespace RPG_Sim
                 Console.Out.WriteLine();
             }
         }
+
+        //Called in Walk
+        public void Tips()
+        {
+            Console.WriteLine("OOh You found an Easter Egg!!! I have no tips for you though...");
+            Console.WriteLine("(Press Enter to Leave)");
+            Console.ReadLine();
+        }
       
         public String Walk()
         {
@@ -107,6 +115,12 @@ namespace RPG_Sim
                 case "d":
                     if (player.XCoord != MapSize - 1)
                         player.XCoord++;
+                    break;
+                case "q":
+                    Environment.Exit(0);
+                    break;
+                case "h":
+                    Tips();
                     break;
                 default:
                     Console.WriteLine("Send w, a, s, or d to move");

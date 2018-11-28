@@ -57,110 +57,56 @@ namespace RPG_Sim
 
         public int XCoord
         {
-            get
-            {
-                return _xCoord;
-            }
-            set
-            {
-                _xCoord = value;
-            }
+            get{ return _xCoord;}
+            set{ _xCoord = value;}
         }
 
         public int YCoord
         {
-            get
-            {
-                return _yCoord;
-            }
-            set
-            {
-                _yCoord = value;
-            }
+            get{ return _yCoord; }
+            set{ _yCoord = value;}
         }
 
         public String Icon
         {
-            get
-            {
-                return _icon;
-            }
-            set
-            {
-                _icon = value;
-            }
+            get{ return _icon; }
+            set{ _icon = value;}
         }
 
         public String Name
         {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
+            get{ return _name; }
+            set{ _name = value;}
         }
 
         public int Hp
         {
-            get
-            {
-                return _hp;
-            }
-            set
-            {
-                _hp = value;
-            }
+            get{ return _hp; }
+            set{ _hp = value;}
         }
 
         public int Level
         {
-            get
-            {
-                return _level;
-            }
-            set
-            {
-                _level = value;
-            }
+            get{ return _level; }
+            set{ _level = value;}
         }
 
         public Weapon Weapon
         {
-            get
-            {
-                return _weapon;
-            }
-            set
-            {
-                _weapon = value;
-            }
+            get{ return _weapon; }
+            set{ _weapon = value;}
         }
 
         public int AtkStat
         {
-            get
-            {
-                return _atkStat;
-            }
-            set
-            {
-                _atkStat = value;
-            }
+            get{ return _atkStat; }
+            set{ _atkStat = value;}
         }
 
         public int DefStat
         {
-            get
-            {
-                return _defStat;
-            }
-            set
-            {
-                _defStat = value;
-            }
+            get{ return _defStat; }
+            set{ _defStat = value;}
         }
     }
 }

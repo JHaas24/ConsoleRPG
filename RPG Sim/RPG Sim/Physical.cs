@@ -23,14 +23,8 @@ namespace RPG_Sim
 
         public int Sharpness
         {
-            get
-            {
-                return _sharpness;
-            }
-            set
-            {
-                _sharpness = value;
-            }
+            get{ return _sharpness; }
+            set{ _sharpness = value;}
         }
 
 

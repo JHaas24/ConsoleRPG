@@ -23,63 +23,31 @@ namespace RPG_Sim
 
         public String Name
         {
-            get
-            {
-                return _name;
-            }
-            set
-            {
-                _name = value;
-            }
+            get{ return _name; }
+            set{ _name = value;}
         }
         public String Verb
         {
-            get
-            {
-                return _verb;
-            }
-            set
-            {
-                _verb = value;
-            }
+            get{ return _verb;}
+            set{ _verb = value;}
         }
 
         public int Dmg
         {
-            get
-            {
-                return _dmg;
-            }
-            set
-            {
-                _dmg = value;
-            }
+            get{ return _dmg;}
+            set{ _dmg = value;}
         }
 
         public double CritChance
         {
-            get
-            {
-                return _critChance;
-            }
-            set
-            {
-                _critChance = value;
-            }
+            get{ return _critChance;}
+            set{ _critChance = value;}
         }
 
         public char Type
         {
-            get
-            {
-                return _type;
-            }
-            set
-            {
-                _type = value;
-            }
+            get{ return _type;}
+            set{ _type = value;}
         }
-        
-
     }
 }

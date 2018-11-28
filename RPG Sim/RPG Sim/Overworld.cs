@@ -10,7 +10,7 @@ namespace RPG_Sim
         private String[,] _map;
         public Fighter[] _fighters = new Fighter[20];
         private int _numOfFighters = 4;
-
+        
         public Overworld(int mapSize)
         {
             this._mapSize = mapSize;
@@ -72,22 +72,23 @@ namespace RPG_Sim
                     Map[i,j] = "[     ]";
                     for (int k = 0; k < NumOfFighters; k++)
                     {
-                        if (Fighters[k].XCoord == i && Fighters[k].YCoord == j)
+                        if (Fighters[k].XCoord == j && Fighters[k].YCoord == i)
                         {
                             Map[i, j] = "[" + Fighters[k].Icon + "]";
                         }
                     }
+
                     Console.Out.Write(Map[i,j]);
                 }
                 Console.Out.WriteLine();
             }
         }
-
+        /*
         public void addFighters()
         {
-            for(int i = 0; i < MapSize; i++)
+            for(int j = 0; j < MapSize; j++)
             {
-                for(int j = 0; j < MapSize; j++)
+                for(int i = 0; i < MapSize; i++)
                 {
                     for(int k = 0; k < NumOfFighters; k++)
                     {
@@ -97,10 +98,43 @@ namespace RPG_Sim
                 }
             }
         }
+        */
+        public String Walk()
+        {
+            String move = "";
+            move = Console.In.ReadLine();
+            Fighter player = Fighters[0];
+
+            switch (move)
+            {
+                case "w":
+                    if(player.YCoord != 0)
+                        player.YCoord--;
+                    break;
+                case "a":
+                    if (player.XCoord != 0)
+                        player.XCoord--;
+                    break;
+                case "s":
+                    if (player.YCoord != MapSize - 1)
+                        player.YCoord++;
+                    break;
+                case "d":
+                    if (player.XCoord != MapSize - 1)
+                        player.XCoord++;
+                    break;
+                default:
+                    Console.WriteLine("Send w, a, s, or d to move");
+                    break;
+                
+            }
+            DrawMap();
+            return move;
+        }
 
         public void CheckForBattle()
         {
-            throw new NotImplementedException();
+            
         }
 
         public Fighter[] StartBattle()

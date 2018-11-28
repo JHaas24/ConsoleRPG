@@ -56,6 +56,10 @@ namespace RPG_Sim
                 done = world.Walk();
                 if (done == "q")
                     break;
+
+                bool test;
+                test = world.CheckForBattle();
+                Console.WriteLine(test);
             }
         }
     }

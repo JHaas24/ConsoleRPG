@@ -132,9 +132,18 @@ namespace RPG_Sim
             return move;
         }
 
-        public void CheckForBattle()
+        public bool CheckForBattle()
         {
-            
+            Fighter player = Fighters[0];
+            for(int i = 1; i < NumOfFighters; i++)
+            {
+                if (player.XCoord == Fighters[i].XCoord && player.YCoord == Fighters[i].YCoord)
+                {
+                    return true;
+                }
+            }
+            return false;
+
         }
 
         public Fighter[] StartBattle()

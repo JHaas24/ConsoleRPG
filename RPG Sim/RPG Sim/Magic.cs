@@ -23,14 +23,8 @@ namespace RPG_Sim
 
         public double Accuracy
         {
-            get
-            {
-                return _accuracy;
-            }
-            set
-            {
-                _accuracy = value;
-            }
+            get{ return _accuracy; }
+            set{ _accuracy = value;}
         }
 
     }

@@ -48,14 +48,25 @@ namespace RPG_Sim
             //world.addFighters();
             world.DrawMap();
             //loop game
-            String done; 
+            String done;
+            Random rnd = new Random();
+
             Console.Out.WriteLine("Move your character with a WASD key and hit enter to confirm");
             Console.Out.WriteLine("Press h for tips");
             Console.Out.WriteLine("Press q to quit");
             while (true)
             {
-                world.Walk();
-
+                String move = "";
+                move = Console.In.ReadLine();
+                world.Walk(world.Fighters[0], move);
+                for (int i = 1; i < world.Fighters.Length; i++)
+                {
+                    Console.Out.WriteLine(world.Fighters.Length);
+                    int num = rnd.Next(4);
+                    String str = num.ToString();
+                    world.Walk(world.Fighters[i], str);
+                }
+                
                 int fighterIndex = world.CheckForBattle();
                 if (fighterIndex != 0)
                 {

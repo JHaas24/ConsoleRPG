@@ -8,13 +8,15 @@ namespace RPG_Sim
     {
         private int _mapSize;
         private String[,] _map;
-        public Fighter[] _fighters = new Fighter[20];
         private int _numOfFighters = 4;
+        public Fighter[] _fighters;
+       
         
         public Overworld(int mapSize)
         {
             this._mapSize = mapSize;
             _map = new String[mapSize, mapSize];
+            _fighters = new Fighter[_numOfFighters];
         }
 
         public String[,] Map
@@ -87,48 +89,103 @@ namespace RPG_Sim
         //Called in Walk
         public void Tips()
         {
-            Console.WriteLine("OOh You found an Easter Egg!!! I have no tips for you though...");
-            Console.WriteLine("(Press Enter to Leave)");
-            Console.ReadLine();
+            Console.Clear();
+            String advance = "";
+            Console.WriteLine("Welcome to hints!");
+            Console.WriteLine("(Send {Enter} to advance and {r} to return)");
+            advance = Console.ReadLine();
+            if (advance.Equals("r"))
+                return;
+            Console.WriteLine("There are actually two different types of Weapons in this world");
+            advance = Console.ReadLine();
+            if (advance.Equals("r"))
+                return;
+            Console.WriteLine("Some weapons make direct contact with their opponent, but will become less effective as the battle draws out.");
+            Console.WriteLine("Others are magical based attacks, however, these weapons may miss their target occasionally.");
+            advance = Console.ReadLine();
+            if (advance.Equals("r"))
+                return;
+            Console.WriteLine("When viewing an enemy in the overworld, you can see a majority of their stats and compare how you line up.");
+            Console.WriteLine("However, you cannot see their weapon's stats.");
+            Console.WriteLine("You will have to analyze the battle log to and estimate how it stacks up to your weapon.");
+            advance = Console.ReadLine();
+            if (advance.Equals("r"))
+                return;
+            Console.WriteLine("Regardless of weapon type, all have hidden weapon damage and a critical-hit rate");
+            advance = Console.ReadLine();
         }
       
-        public String Walk()
+        public bool NextToPlayer(Fighter f)
         {
-            String move = "";
-            move = Console.In.ReadLine();
             Fighter player = Fighters[0];
-
-            switch (move)
+            if (f != player)
             {
-                case "w":
-                    if(player.YCoord != 0)
-                        player.YCoord--;
-                    break;
-                case "a":
-                    if (player.XCoord != 0)
-                        player.XCoord--;
-                    break;
-                case "s":
-                    if (player.YCoord != MapSize - 1)
-                        player.YCoord++;
-                    break;
-                case "d":
-                    if (player.XCoord != MapSize - 1)
-                        player.XCoord++;
-                    break;
-                case "q":
-                    Environment.Exit(0);
-                    break;
-                case "h":
-                    Tips();
-                    break;
-                default:
-                    Console.WriteLine("Send w, a, s, or d to move");
-                    break;
-                
+                if ((f.XCoord - 1 == player.XCoord) && f.YCoord == player.YCoord )                
+                        return true;
+                else
+                     if (f.XCoord + 1 == player.XCoord && f.YCoord == player.YCoord)
+                        return true;
+                else
+                     if (f.YCoord + 1 == player.YCoord && f.XCoord == player.XCoord)
+                    return true;
+                else
+                     if (f.YCoord - 1 == player.YCoord && f.XCoord == player.XCoord)
+                    return true;
+                else
+                     if (f.YCoord == player.YCoord && f.XCoord == player.XCoord)
+                    return true;
+                else
+                        return false;
             }
+            else
+                return false;
+        } 
+
+        public String Walk(Fighter f, String dir)
+        {
+            //move = Console.In.ReadLine();
+            //Fighter player = Fighters[0];
+            if (!NextToPlayer(f))
+            {
+
+                if (dir.Equals("w") || dir.Equals("0"))
+                {
+                    if (f.YCoord != 0)
+                        f.YCoord--;
+                    else
+                        return "fail";
+                }
+                if (dir.Equals("a") || dir.Equals("1"))
+                {
+                    if (f.XCoord != 0)
+                        f.XCoord--;
+                    else
+                        return "fail";
+                }
+                if (dir.Equals("s") || dir.Equals("2"))
+                {
+                    if (f.YCoord != MapSize - 1)
+                        f.YCoord++;
+                    else
+                        return "fail";
+                }
+                if (dir.Equals("d") || dir.Equals("3"))
+                {
+                    if (f.XCoord != MapSize - 1)
+                        f.XCoord++;
+                    else
+                        return "fail";
+                }
+                if (dir.Equals("q"))
+                    Environment.Exit(0);
+                if (dir.Equals("t"))
+                    Tips();
+            }           
+                    
             DrawMap();
-            return move;
+            return "";
+
+
         }
         //return index of fighter player is on
         //0 means no fighter found

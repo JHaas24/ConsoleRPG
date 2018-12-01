@@ -8,7 +8,7 @@ namespace RPG_Sim
     {
         private int _mapSize;
         private String[,] _map;
-        private int _numOfFighters = 4;
+        private int _numOfFighters = 5;
         public Fighter[] _fighters;
        
         
@@ -44,7 +44,7 @@ namespace RPG_Sim
         }
 
         //Display greeting message and player initialization
-        public void Welcome()
+        public String Welcome()
         {
             Console.Out.WriteLine("Welcome to RPG Sim!!! ");
             Console.Out.WriteLine("What is your name???");
@@ -61,8 +61,23 @@ namespace RPG_Sim
             while (Fighters[0].Icon.Length != 5)
                 Fighters[0].Icon += " ";
 
+            String choice = "";
+            while(!((choice.Equals("1") || choice.Equals("2")) || choice.Equals("3")))
+            {
+                
+                Console.WriteLine("Choose your weapon!");
+                Console.WriteLine("1: Wand");
+                Console.WriteLine("2: Stick");
+                Console.WriteLine("3: Toungue");
+                Console.WriteLine("(send 1, 2, or 3...)");
+                choice = Console.ReadLine();
+                Console.WriteLine(choice);
+            }
+            
+
             Console.Out.WriteLine("Alright " + Fighters[0].Name + "! Welcome to the battle royale! (press enter)");
             Console.In.ReadLine();
+            return choice;
         }
 
         public void DrawMap()
@@ -114,6 +129,7 @@ namespace RPG_Sim
                 return;
             Console.WriteLine("Regardless of weapon type, all have hidden weapon damage and a critical-hit rate");
             advance = Console.ReadLine();
+
         }
       
         //is the player one tile away from enemy f?
@@ -230,7 +246,6 @@ namespace RPG_Sim
         //Only called when player is on an enemy
         public Fighter DisplayStat(Fighter f)
         {
-                String start = "n";
                 Fighter player = Fighters[0];
                 Fighter enemy = f;
 

@@ -20,18 +20,24 @@ namespace RPG_Sim
             //Declare battle instance
             Battle battle = new Battle();//may be static
 
+
             //Weapons
-            Magic wand = new Magic(90, "Stick", "Smacked", 100, .10, "m");
-            Physical stick = new Physical("stick", "wacked", 80, .99, "p");
-            Physical tounge = new Physical("tounge", "slurped", 30, .5, "p");
+            Magic wand = new Magic(90, "Wand", "Zapped", 100, 90, "m");
+            Physical stick = new Physical("stick", "wacked", 80, 99, "p");
+            Physical tounge = new Physical("tounge", "slurped", 30, 99, "p");
+            Physical godTounge = new Physical("God Tounge", "S L U R P E D", 500, 60, "p");
+            Physical pickaxe = new Physical("Pickaxe", "whacked", 20, 10, "p");
 
-
+            Magic Rocket = new Magic(100, "Rocket Barrage", "Nuked", 600, 30, "m");
+           
             //Fighters
-            Fighter player = new Fighter("", 1000, 1, stick, 20, 10, "", 0, 0);
+            Fighter player = new Fighter("", 1000, 1, new Weapon(), 20, 10, "", 0, 0);
 
-            Fighter e1 = new Fighter("MT", 1000, 1, stick, 20, 10, "(lll)", 5, 6);
-            Fighter e2 = new Fighter("MT", 1000, 2, stick, 20, 10, "BOSS ", 7, 9);
-            Fighter e3 = new Fighter("MT", 1000, 4, stick, 20, 10, "WWWWW", 5, 1);
+            Fighter e1 = new Fighter("Generic Wizzard", 600, 1, wand, 20, 10, "(WIZ)", 5, 6);          
+            Fighter e3 = new Fighter("Default Skin" , 1000, 4, pickaxe, 20, 10, "dance", 5, 1);
+
+            Fighter e2 = new Fighter("Buff Pharah", 100000, 15, Rocket, 100, 100, "Rockt", 7, 9);
+            Fighter e4 = new Fighter("Ghirahim", 50000, 18, godTounge, 300, 5, "GHIRA", 10, 10);
 
             //initialize componants
             //index 0 is player
@@ -42,12 +48,19 @@ namespace RPG_Sim
                 world.Fighters[1] = e1;
                 world.Fighters[2] = e2;
                 world.Fighters[3] = e3;
+                world.Fighters[4] = e4;
             }
             // Fighter.Fighters[i] = e4;
             // Fighter.Fighters[i] = e5;
             addFIghters();
-            world.Welcome();
-            
+            String wea = world.Welcome();
+            if (wea.Equals("1"))
+                player.Weapon = wand;
+            else if (wea.Equals("2"))
+                player.Weapon = stick;
+            else if (wea.Equals("3"))
+                player.Weapon = tounge;
+
             //world.addFighters();
             world.DrawMap();
             //loop game
@@ -87,7 +100,7 @@ namespace RPG_Sim
                         
                         if (start.Equals("y") || Battle.Intentional == false)
                         {
-                            battle.InitiateBattle(player.Name, world.Fighters[i].Name);
+                            Battle.InitiateBattle(player.Name, world.Fighters[i].Name);
                             while (player.Hp > 0 && world.Fighters[i].Hp > 0)
                             {
                                 Console.WriteLine(player.Name + " HP: " + player.Hp);
@@ -105,14 +118,19 @@ namespace RPG_Sim
                             {
                                 Console.WriteLine(player.Name + " Was Crushed By " + world.Fighters[i].Name + "!");
                                 Console.WriteLine(player.Name + " Leveled down!");
-                                player.Level--;
+                                player.LevelDown();
                             }
                             else
                             {
                                 Console.WriteLine(player.Name + " Defeated " + world.Fighters[i].Name + "!");
                                 Console.WriteLine(player.Name + " Leveled up!");
                                 Console.WriteLine(player.Name + "'s Stats increased!");
-                                player.Level++;
+                                player.Levelup();
+                                bool steal = Battle.StealWeapon(world.Fighters[i]);
+                                if (steal)
+                                {
+                                    player.Weapon = world.Fighters[i].Weapon;
+                                }
                             }
                             player.Hp = player.MaxHp;
                             world.Fighters[i].Hp = world.Fighters[i].MaxHp;

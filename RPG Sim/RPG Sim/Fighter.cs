@@ -42,9 +42,20 @@ namespace RPG_Sim
 
         
 
-        public void Levelup(Fighter[] f)
+        public void Levelup()
         {
-            throw new NotImplementedException();
+            this.Level++;
+            this.AtkStat *= 1.2;
+            this.DefStat *= 1.2;
+            this.MaxHp *= 1.2;
+
+        }
+        public void LevelDown()
+        {
+            this.Level--;
+            this.AtkStat *= .8;
+            this.DefStat *= .8;
+            this.MaxHp *= .8;
         }
 
         public void DisplayStats(Fighter f)

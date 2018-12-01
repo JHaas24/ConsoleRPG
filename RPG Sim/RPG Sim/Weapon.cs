@@ -12,6 +12,11 @@ namespace RPG_Sim
         private double _critChance;
         private String _type;
 
+        public Weapon()
+        {
+
+        }
+
         public Weapon(String name, String verb, int dmg, double critChance, String type)
         {
             this._name = name;

@@ -14,6 +14,7 @@ namespace RPG_Sim
             Random rando = new Random();
             double chance;
             bool critHit = false;
+            bool miss = false;
             
             //Offence damage
             amt = off.AtkStat + off.Weapon.Dmg;
@@ -31,7 +32,6 @@ namespace RPG_Sim
             {
                 Physical p = (Physical) off.Weapon;
                 amt -= p.Dmg * p.Sharpness;
-                Console.WriteLine(p.Sharpness * p.Dmg);
                 
                 p.DullWeapon(p);
             }
@@ -39,15 +39,23 @@ namespace RPG_Sim
             {
                 chance = rando.Next(100) + 1;
                 Magic m = (Magic) off.Weapon;
+                Console.Out.WriteLine(chance);
+                Console.Out.WriteLine(m.Accuracy);
                 if (chance >= m.Accuracy)
+                {
                     amt = 0;
+                    miss = true;
+                }
             }
 
             def.Hp -= amt;
-            
-          // Console.WriteLine(off.Weapon.Dmg);
 
-            Console.Out.WriteLine(off.Name + " " + off.Weapon.Verb + " " + def.Name + " for " + amt + " damage!");
+            // Console.WriteLine(off.Weapon.Dmg);
+            if (!miss)
+                Console.Out.WriteLine(off.Name + " " + off.Weapon.Verb + " " + def.Name + " for " + amt + " damage!");
+            else
+                Console.WriteLine(off.Name + " Missed!" );
+
             if (critHit)
                 Console.WriteLine("It was a Critical Hit!");
             
@@ -55,7 +63,7 @@ namespace RPG_Sim
             
         }
 
-        public void InitiateBattle(String pName, String eName)
+        public static void InitiateBattle(String pName, String eName)
         {
             Console.Clear();
             if (Intentional == false)
@@ -66,10 +74,19 @@ namespace RPG_Sim
             Console.ReadLine();
         }
 
-        //
-        public void Eliminated(Fighter f)
+        public static bool StealWeapon(Fighter f)
         {
-            throw new NotImplementedException();
+            String choice = "";
+            while (!(choice.Equals("y") || choice.Equals("n"))){
+
+
+                Console.WriteLine("Would you like to steal " + f.Name + "'s " + f.Weapon.Name + "? (y/n)");
+                choice = Console.ReadLine();
+            }
+            if (choice.Equals("y"))
+                return true;
+            else
+                return false;
         }
 
         public static bool Intentional

@@ -6,31 +6,32 @@ namespace RPG_Sim
 {
     public class Physical : Weapon
     {
-        private int _sharpness;
+        private double _sharpness;
         private String _name;
         private String _verb;
         private int _dmg;
         private double _critChance;
 
-        public Physical(String name, String verb, int dmg, double critChance, char type) : base(name, verb, dmg, critChance, type)
+        public Physical(String name, String verb, int dmg, double critChance, String type) : base(name, verb, dmg, critChance, type)
         {
-            _sharpness = 100;
+            _sharpness = 0;
+            this._dmg = dmg;
             this._name = name;
             this._verb = verb;
             this._critChance = critChance;
             this.Type = type;
         }
 
-        public int Sharpness
+        public double Sharpness
         {
             get{ return _sharpness; }
             set{ _sharpness = value;}
         }
 
 
-        public int DullWeapon(Physical p)
+        public void DullWeapon(Physical p)
         {
-            throw new NotImplementedException();
+            p.Sharpness += .01;
         }
 
     }

@@ -12,9 +12,10 @@ namespace RPG_Sim
         int _dmg;
         double _critChance;
 
-        public Magic(double accuracy, String name, String verb, int dmg, double critChance, char type) : base(name, verb, dmg, critChance, type)
+        public Magic(double accuracy, String name, String verb, int dmg, double critChance, String type) : base(name, verb, dmg, critChance, type)
         {
             this._accuracy = accuracy;
+            this._dmg = dmg;
             this._name = name;
             this._verb = verb;
             this._dmg = dmg;

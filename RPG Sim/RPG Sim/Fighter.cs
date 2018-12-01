@@ -7,11 +7,12 @@ namespace RPG_Sim
     public class Fighter
     {
         private String _name;
-        private int _hp;
+        private double _maxHp;
+        private double _hp;
         private int _level;
         private Weapon _weapon;
-        private int _atkStat;
-        private int _defStat;
+        private double _atkStat;
+        private double _defStat;
         private String _icon;
 
         private int _xCoord = -1;
@@ -25,10 +26,10 @@ namespace RPG_Sim
         {
 
         }
-        public Fighter(String name, int hp, int level, Weapon weapon, int attStat, int defStat, String icon, int xCoord, int yCoord)
+        public Fighter(String name, int maxHp, int level, Weapon weapon, int attStat, int defStat, String icon, int xCoord, int yCoord)
         {
             this._name = name;
-            this._hp = hp;
+            this._maxHp = maxHp;
             this._level = level;
             this._weapon = weapon;
             this._atkStat = attStat;
@@ -36,6 +37,7 @@ namespace RPG_Sim
             this._icon = icon;
             this._xCoord = xCoord;
             this._yCoord = yCoord;
+            this._hp = _maxHp;
         }
 
         
@@ -53,7 +55,11 @@ namespace RPG_Sim
             Console.WriteLine("Fighter Information:");
         }
 
-        
+        public double MaxHp
+        {
+            get { return _maxHp; }
+            set { _maxHp = value; }
+        } 
 
         public int XCoord
         {
@@ -79,7 +85,7 @@ namespace RPG_Sim
             set{ _name = value;}
         }
 
-        public int Hp
+        public double Hp
         {
             get{ return _hp; }
             set{ _hp = value;}
@@ -97,13 +103,13 @@ namespace RPG_Sim
             set{ _weapon = value;}
         }
 
-        public int AtkStat
+        public double AtkStat
         {
             get{ return _atkStat; }
             set{ _atkStat = value;}
         }
 
-        public int DefStat
+        public double DefStat
         {
             get{ return _defStat; }
             set{ _defStat = value;}

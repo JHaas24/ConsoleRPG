@@ -10,9 +10,9 @@ namespace RPG_Sim
         private String _verb;
         private int _dmg;
         private double _critChance;
-        private char _type;
+        private String _type;
 
-        public Weapon(String name, String verb, int dmg, double critChance, char type)
+        public Weapon(String name, String verb, int dmg, double critChance, String type)
         {
             this._name = name;
             this._verb = verb;
@@ -44,7 +44,7 @@ namespace RPG_Sim
             set{ _critChance = value;}
         }
 
-        public char Type
+        public String Type
         {
             get{ return _type;}
             set{ _type = value;}

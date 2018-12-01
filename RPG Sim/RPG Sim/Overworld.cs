@@ -43,6 +43,7 @@ namespace RPG_Sim
             set { _numOfFighters = value; }
         }
 
+        //Display greeting message and player initialization
         public void Welcome()
         {
             Console.Out.WriteLine("Welcome to RPG Sim!!! ");
@@ -86,7 +87,7 @@ namespace RPG_Sim
             }
         }
 
-        //Called in Walk
+        //Called in Walk if player presses h
         public void Tips()
         {
             Console.Clear();
@@ -115,32 +116,49 @@ namespace RPG_Sim
             advance = Console.ReadLine();
         }
       
+        //is the player one tile away from enemy f?
         public bool NextToPlayer(Fighter f)
         {
             Fighter player = Fighters[0];
             if (f != player)
             {
-                if ((f.XCoord - 1 == player.XCoord) && f.YCoord == player.YCoord )                
-                        return true;
+                if ((f.XCoord - 1 == player.XCoord) && f.YCoord == player.YCoord)
+                {
+                    Battle.Intentional = true;
+                    return true;
+                }
                 else
                      if (f.XCoord + 1 == player.XCoord && f.YCoord == player.YCoord)
-                        return true;
+                {
+                    Battle.Intentional = true;
+                    return true;
+                }
                 else
                      if (f.YCoord + 1 == player.YCoord && f.XCoord == player.XCoord)
+                {
+                    Battle.Intentional = true;
                     return true;
+                }
                 else
                      if (f.YCoord - 1 == player.YCoord && f.XCoord == player.XCoord)
+                {
+                    Battle.Intentional = true;
                     return true;
+                }
                 else
                      if (f.YCoord == player.YCoord && f.XCoord == player.XCoord)
+                {
+                    Battle.Intentional = false;
                     return true;
+                }
                 else
-                        return false;
+                    return false;
             }
             else
                 return false;
         } 
 
+        //Move both player and enemy
         public String Walk(Fighter f, String dir)
         {
             //move = Console.In.ReadLine();
@@ -181,12 +199,9 @@ namespace RPG_Sim
                 if (dir.Equals("t"))
                     Tips();
             }           
-                    
-            DrawMap();
-            return "";
-
-
+                return "";
         }
+
         //return index of fighter player is on
         //0 means no fighter found
         public int CheckForBattle()
@@ -213,23 +228,24 @@ namespace RPG_Sim
         private int _defStat;
         */
         //Only called when player is on an enemy
-        public void DisplayStat(int index)
+        public Fighter DisplayStat(Fighter f)
         {
-            Fighter player = Fighters[0];
-            Fighter enemy =  Fighters[index];
+                String start = "n";
+                Fighter player = Fighters[0];
+                Fighter enemy = f;
 
-            Console.WriteLine("          <---" + player.Name + " VS " + enemy.Name + "--->");
-            Console.WriteLine("___________________________________________");
-            Console.WriteLine("Level:   " + player.Level + "|" + enemy.Level);
-            Console.WriteLine("HP:      " + player.Hp + "|" + enemy.Hp);
-            Console.WriteLine("Weapon:  " + player.Weapon.Name + "|" + enemy.Weapon.Name);
-            Console.WriteLine("Attack:  " + player.AtkStat + "|" + enemy.AtkStat);
-            Console.WriteLine("Defense: " + player.DefStat + "|" + enemy.DefStat);
+                Console.WriteLine("          <---" + player.Name + " VS " + enemy.Name + "--->");
+                Console.WriteLine("___________________________________________");
+                Console.WriteLine("Level:   " + player.Level + "|" + enemy.Level);
+                Console.WriteLine("HP:      " + player.Hp + "|" + enemy.Hp);
+                Console.WriteLine("Weapon:  " + player.Weapon.Name + "|" + enemy.Weapon.Name);
+                Console.WriteLine("Attack:  " + player.AtkStat + "|" + enemy.AtkStat);
+                Console.WriteLine("Defense: " + player.DefStat + "|" + enemy.DefStat);
+                Console.WriteLine();
+            
+            return f;
         }
 
-        public Fighter[] StartBattle()
-        {
-            throw new NotImplementedException();
-        }       
+      
     }
 }

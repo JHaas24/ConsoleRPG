@@ -65,14 +65,6 @@ namespace RPG_Sim
             this.MaxHp *= .8;
         }
 
-        public void DisplayStats(Fighter f)
-        {
-            Console.WriteLine(f.Name);
-            Console.WriteLine("Fighter Information:");
-            Console.WriteLine("Fighter Information:");
-            Console.WriteLine("Fighter Information:");
-        }
-        
         public int Bounty
         {
             get { return _bounty; }

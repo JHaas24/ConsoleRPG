@@ -1,0 +1,182 @@
+<Project>
+  <Name>ConsoleRPG</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Untitled</Name>
+    <Language>CSharp</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Fighter</Name>
+        <Access>Public</Access>
+        <Location left="957" top="976" />
+        <Size width="699" height="519" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">String _name</Member>
+        <Member type="Field">int _maxHp</Member>
+        <Member type="Field">int _hp</Member>
+        <Member type="Field">int _level</Member>
+        <Member type="Field">Weapon _weapon</Member>
+        <Member type="Field">int _atkStat</Member>
+        <Member type="Field">int _defenseStat</Member>
+        <Member type="Field">private String _icon</Member>
+        <Member type="Field">private int _bounty</Member>
+        <Member type="Field">private int _xCoord = -1</Member>
+        <Member type="Field">private int _yCoord = -1</Member>
+        <Member type="Constructor">public Fighter()</Member>
+        <Member type="Constructor">public Fighter(String name, int maxHp, int level, Weapon weapon, int attStat, int defStat, int bounty, String icon, int xCoord, int yCoord)</Member>
+        <Member type="Method">public void Levelup()</Member>
+        <Member type="Method">public void Levelup(int times)</Member>
+        <Member type="Method">public void LevelDown()</Member>
+        <Member type="Property">public int Bounty { get; set; }</Member>
+        <Member type="Property">public double MaxHp { get; set; }</Member>
+        <Member type="Property">public int XCoord { get; set; }</Member>
+        <Member type="Property">public int YCoord { get; set; }</Member>
+        <Member type="Property">public String Icon { get; set; }</Member>
+        <Member type="Property">publicString Name { get; set; }</Member>
+        <Member type="Property">public int Level { get; set; }</Member>
+        <Member type="Property">public Weapon Weapon { get; set; }</Member>
+        <Member type="Property">public double AtkStat { get; set; }</Member>
+        <Member type="Property">public double DefStat { get; set; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Weapon</Name>
+        <Access>Public</Access>
+        <Location left="333" top="959" />
+        <Size width="353" height="285" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">String _name</Member>
+        <Member type="Field">String _verb</Member>
+        <Member type="Field">int _dmg</Member>
+        <Member type="Field">double _critChance</Member>
+        <Member type="Field">String _type</Member>
+        <Member type="Constructor">public Weapon(String name, String verb, int dmg, double critChance)</Member>
+        <Member type="Constructor">public Weapon()</Member>
+        <Member type="Property">public String Name { get; set; }</Member>
+        <Member type="Property">public String Verb { get; set; }</Member>
+        <Member type="Property">publicint Dmg { get; set; }</Member>
+        <Member type="Property">public double CritChance { get; set; }</Member>
+        <Member type="Property">public String Type { get; set; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Battle</Name>
+        <Access>Public</Access>
+        <Location left="1726" top="473" />
+        <Size width="486" height="196" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private static bool _intentional</Member>
+        <Member type="Field">private static String _auto = ""</Member>
+        <Member type="Property">public static bool Intentional { get; set; }</Member>
+        <Member type="Property">public static String Auto { get; set; }</Member>
+        <Member type="Method">public static void Attack(Fighter off, Fighter def)</Member>
+        <Member type="Method">public static void InitiateBattle(String pName, String eName)</Member>
+        <Member type="Method">public static bool StealWeapon(Fighter f)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Physical</Name>
+        <Access>Public</Access>
+        <Location left="10" top="1549" />
+        <Size width="434" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">int sharpness</Member>
+        <Member type="Field">String _name</Member>
+        <Member type="Field">String _verb</Member>
+        <Member type="Field">int _dmg</Member>
+        <Member type="Field">double _critChance</Member>
+        <Member type="Constructor">public Physical(String name, String verb, int dmg, double critChance, String type)</Member>
+        <Member type="Property">public double Sharpness { get; set; }</Member>
+        <Member type="Method">public int DullWeapon(Sword s)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Magic</Name>
+        <Access>Public</Access>
+        <Location left="634" top="1549" />
+        <Size width="490" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">double accuracy</Member>
+        <Member type="Field">String _name</Member>
+        <Member type="Field">String _verb</Member>
+        <Member type="Field">int _dmg</Member>
+        <Member type="Field">double _critChance</Member>
+        <Member type="Constructor">public Magic(double accuracy, String name, String verb, int dmg, double critChance, String type)</Member>
+        <Member type="Property">public double Accuracy { get; set; }</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Overworld</Name>
+        <Access>Public</Access>
+        <Location left="1062" top="375" />
+        <Size width="418" height="400" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private int _mapSize</Member>
+        <Member type="Field">private String[,] _map</Member>
+        <Member type="Field">private int _numOfFighters = 7</Member>
+        <Member type="Field">private Fighter[] _fighters</Member>
+        <Member type="Field">private int[] _defeated</Member>
+        <Member type="Constructor">public Overworld(int mapSize)</Member>
+        <Member type="Property">public String[,] Map { get; set; }</Member>
+        <Member type="Property">public int MapSize { get; set; }</Member>
+        <Member type="Property">public int[] Defeated { get; set; }</Member>
+        <Member type="Property">public Fighter[] Fighters { get; set; }</Member>
+        <Member type="Property">public int NumOfFighters { get; set; }</Member>
+        <Member type="Method">public String Welcome()</Member>
+        <Member type="Method">public void DrawMap()</Member>
+        <Member type="Method">public void Tips()</Member>
+        <Member type="Method">public bool NextToPlayer(Fighter f)</Member>
+        <Member type="Method">public String Walk(Fighter f, String dir)</Member>
+        <Member type="Method">public int CheckForBattle()</Member>
+        <Member type="Method">public Fighter DisplayStat(Fighter f)</Member>
+        <Member type="Method">public bool Winner(int[] arr)</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Association" first="1" second="0">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Generalization" first="3" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>465</X>
+          <Y>1277</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Generalization" first="4" second="1">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>466</X>
+          <Y>1271</Y>
+        </BendPoint>
+      </Relationship>
+      <Relationship type="Association" first="0" second="5">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>1144</X>
+          <Y>812</Y>
+        </BendPoint>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="5" second="2">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Bidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>

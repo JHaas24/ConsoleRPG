@@ -31,7 +31,8 @@ namespace RPG_Sim
 
         public void DullWeapon(Physical p)
         {
-            p.Sharpness += .01;
+            if (p.Sharpness < .5)
+                p.Sharpness += .01;
         }
 
     }

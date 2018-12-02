@@ -42,7 +42,12 @@ namespace RPG_Sim
             this._hp = _maxHp;
         }
 
-        
+        //Overloaded function (-.0)
+        public void Levelup()
+        {
+            this.Weapon.Dmg += 10;
+            this.Weapon.CritChance += 1;
+        }
 
         public void Levelup(int times)
         {

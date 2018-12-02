@@ -9,14 +9,15 @@ namespace RPG_Sim
         private int _mapSize;
         private String[,] _map;
         private int _numOfFighters = 7;
-        public Fighter[] _fighters;
-       
+        private Fighter[] _fighters;
+        private int[] _defeated;
         
         public Overworld(int mapSize)
         {
             this._mapSize = mapSize;
             _map = new String[mapSize, mapSize];
             _fighters = new Fighter[_numOfFighters];
+            _defeated = new int[_numOfFighters];
         }
 
         public String[,] Map
@@ -29,6 +30,12 @@ namespace RPG_Sim
         {
             get { return _mapSize; }
             set { _mapSize = value; }
+        }
+
+        public int[] Defeated
+        {
+            get { return _defeated; }
+            set { _defeated = value; }
         }
 
         public Fighter[] Fighters
@@ -46,11 +53,23 @@ namespace RPG_Sim
         //Display greeting message and player initialization
         public String Welcome()
         {
-            Console.Out.WriteLine("Welcome to RPG Sim!!! ");
+            Console.Out.WriteLine("Welcome to Kindom Royale!!! Press Enter");
+            Console.ReadLine();
+            Console.Out.WriteLine("You and several others have been randomly selected by the North Korean government to participate in a Battle Royale");
+            Console.Out.WriteLine("The first participant to defeat all others will win North Korea");
+            Console.Out.WriteLine("Prey on the weak and level up before taking on greater enemies");
+            Console.ReadLine();
+            Console.Out.WriteLine("Time to get started");
             Console.Out.WriteLine("What is your name???");
 
             Fighters[0].Name = Console.In.ReadLine();
+            if (Fighters[0].Name.Equals(""))
+            {
+                Fighters[0].Name = "NK_FIGHTER_4629021";
+                Console.WriteLine("Oh, you don't have a name, fine. I'll assign you one...");
+            }
             Console.Out.WriteLine("Welcome " + Fighters[0].Name + "!");
+            
             Console.Out.WriteLine("Choose your map icon. (one to five characters long) ex: (*.*)");
             Fighters[0].Icon = Console.In.ReadLine();
             while (Fighters[0].Icon.Length > 5 || Fighters[0].Icon.Length < 1)
@@ -65,7 +84,7 @@ namespace RPG_Sim
             while(!((choice.Equals("1") || choice.Equals("2")) || choice.Equals("3")))
             {
                 
-                Console.WriteLine("Choose your weapon!");
+                Console.WriteLine("Choose your starter weapon!");
                 Console.WriteLine("1: Wand");
                 Console.WriteLine("2: Stick");
                 Console.WriteLine("3: Toungue");
@@ -128,7 +147,10 @@ namespace RPG_Sim
                 return;
             Console.WriteLine("Regardless of weapon type, all have hidden weapon damage and a critical-hit rate");
             advance = Console.ReadLine();
-
+            if (advance.Equals("r"))
+                return;
+            Console.WriteLine("You may automatically advance through battle text by typing {auto} during battle!");
+            advance = Console.ReadLine();
         }
       
         //is the player one tile away from enemy f?
@@ -211,7 +233,7 @@ namespace RPG_Sim
                 }
                 if (dir.Equals("q"))
                     Environment.Exit(0);
-                if (dir.Equals("t"))
+                if (dir.Equals("h"))
                     Tips();
             }           
                 return "";
@@ -260,5 +282,18 @@ namespace RPG_Sim
             
             return f;
         }     
+
+        public bool Winner(int[] arr)
+        {
+            for(int i = 1; i < NumOfFighters; i++)
+            {
+                if(Defeated[i] != 1)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
     }
 }

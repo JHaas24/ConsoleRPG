@@ -26,15 +26,15 @@ namespace RPG_Sim
 
             Magic experience = new Magic(50, "Experience", "rejected", 50, 30, "m");
             Magic rocket = new Magic(100, "Rocket Barrage", "Nuked", 600, 30, "m");
-            Magic guillotine = new Magic(1, "Guillotine", "Decapactated", 9000000, 100, "m");
+            Magic guillotine = new Magic(1, "Guillotine", "Decapactated", 9000000, 10, "m");
            
             //Fighters
             Fighter player = new Fighter("", 1000, 1, new Weapon(), 20, 10, 0, "", 0, 0);
 
             Fighter e1 = new Fighter("Generic Wizzard", 600, 1, wand, 20, 10, 1, "(WIZ)", 5, 6);          
-            Fighter e3 = new Fighter("Default Skin" , 1000, 4, pickaxe, 20, 10, 3, "dace", 5, 1);
+            Fighter e3 = new Fighter("Default Skin" , 1000, 4, pickaxe, 20, 10, 3, "dance", 5, 1);
             Fighter e5 = new Fighter("Employeer", 3000, 7, experience, 30, 3, 52, "(-_-)", 7, 8);
-            Fighter e6 = new Fighter("Metal Woman", 100000, 9, guillotine, 1000, 0, 9, "[]M[]", 2, 12);
+            Fighter e6 = new Fighter("Metal Woman", 100000, 9, guillotine, 1000, 1, 9, "[]M[]", 2, 12);
 
             Fighter e2 = new Fighter("Buff Pharah", 100000, 15, rocket, 100, 100, 8, "Rockt", 7, 9);
             Fighter e4 = new Fighter("Ghirahim", 50000, 18, godTounge, 300, 5, 10, "GHIRA", 10, 10);
@@ -71,7 +71,8 @@ namespace RPG_Sim
             Console.Out.WriteLine("Move your character with a WASD key and hit enter to confirm");
             Console.Out.WriteLine("Press h for tips");
             Console.Out.WriteLine("Press q to quit");
-            while (true)
+            //loop the game until every enemy is conquered
+            while (!world.Winner(world.Defeated))
             {
                 String move = "";
                 move = Console.In.ReadLine();
@@ -90,6 +91,7 @@ namespace RPG_Sim
                 }
                 world.DrawMap();
 
+                //check if player is next to enemies and determine whether to start a battle
                 String start = "";
                 for (int i = 0; i < world.Fighters.Length; i++)
                 {
@@ -138,6 +140,8 @@ namespace RPG_Sim
                                 {
                                     player.Weapon = world.Fighters[i].Weapon;
                                 }
+                                //mark as defeated
+                                world.Defeated[i] = 1;
                             }
                             //reset stats and move enemy away
                             player.Hp = player.MaxHp;
@@ -146,6 +150,7 @@ namespace RPG_Sim
                             world.Fighters[i].YCoord = 0;
                             Battle.Auto = "";
                         }
+                        //no battle
                         else
                         {
                             Console.Clear();
@@ -153,10 +158,11 @@ namespace RPG_Sim
                         }
                      
                     }
-                }
-
-               
+                }             
             }
+            Console.Out.WriteLine("#1 Victory Royale!!!");
+            Console.Out.WriteLine("Congratulations, despite all odds and limitations, you have defeated all enemies!!!");
+            Console.Out.WriteLine("~Thanks For Playing~");
         }
     }
 }

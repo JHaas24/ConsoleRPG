@@ -17,7 +17,7 @@ namespace RPG_Sim
             bool critHit = false;
             bool miss = false;
 
-            //Offence damage
+            //Offense damage
             amt = off.AtkStat + off.Weapon.Dmg;
 
             chance = rando.Next(100) + 1;
@@ -47,8 +47,8 @@ namespace RPG_Sim
                     miss = true;
                 }
             }
-
-            def.Hp -= amt;
+            if(amt >= 0)
+                def.Hp -= amt;
 
             // Console.WriteLine(off.Weapon.Dmg);
             if (!Auto.Equals("auto"))

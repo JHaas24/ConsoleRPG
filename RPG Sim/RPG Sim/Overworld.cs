@@ -8,7 +8,7 @@ namespace RPG_Sim
     {
         private int _mapSize;
         private String[,] _map;
-        private int _numOfFighters = 4;
+        private int _numOfFighters = 5;
         public Fighter[] _fighters;
        
         
@@ -43,7 +43,8 @@ namespace RPG_Sim
             set { _numOfFighters = value; }
         }
 
-        public void Welcome()
+        //Display greeting message and player initialization
+        public String Welcome()
         {
             Console.Out.WriteLine("Welcome to RPG Sim!!! ");
             Console.Out.WriteLine("What is your name???");
@@ -60,8 +61,23 @@ namespace RPG_Sim
             while (Fighters[0].Icon.Length != 5)
                 Fighters[0].Icon += " ";
 
+            String choice = "";
+            while(!((choice.Equals("1") || choice.Equals("2")) || choice.Equals("3")))
+            {
+                
+                Console.WriteLine("Choose your weapon!");
+                Console.WriteLine("1: Wand");
+                Console.WriteLine("2: Stick");
+                Console.WriteLine("3: Toungue");
+                Console.WriteLine("(send 1, 2, or 3...)");
+                choice = Console.ReadLine();
+                Console.WriteLine(choice);
+            }
+            
+
             Console.Out.WriteLine("Alright " + Fighters[0].Name + "! Welcome to the battle royale! (press enter)");
             Console.In.ReadLine();
+            return choice;
         }
 
         public void DrawMap()
@@ -86,7 +102,7 @@ namespace RPG_Sim
             }
         }
 
-        //Called in Walk
+        //Called in Walk if player presses h
         public void Tips()
         {
             Console.Clear();
@@ -113,34 +129,52 @@ namespace RPG_Sim
                 return;
             Console.WriteLine("Regardless of weapon type, all have hidden weapon damage and a critical-hit rate");
             advance = Console.ReadLine();
+
         }
       
+        //is the player one tile away from enemy f?
         public bool NextToPlayer(Fighter f)
         {
             Fighter player = Fighters[0];
             if (f != player)
             {
-                if ((f.XCoord - 1 == player.XCoord) && f.YCoord == player.YCoord )                
-                        return true;
+                if ((f.XCoord - 1 == player.XCoord) && f.YCoord == player.YCoord)
+                {
+                    Battle.Intentional = true;
+                    return true;
+                }
                 else
                      if (f.XCoord + 1 == player.XCoord && f.YCoord == player.YCoord)
-                        return true;
+                {
+                    Battle.Intentional = true;
+                    return true;
+                }
                 else
                      if (f.YCoord + 1 == player.YCoord && f.XCoord == player.XCoord)
+                {
+                    Battle.Intentional = true;
                     return true;
+                }
                 else
                      if (f.YCoord - 1 == player.YCoord && f.XCoord == player.XCoord)
+                {
+                    Battle.Intentional = true;
                     return true;
+                }
                 else
                      if (f.YCoord == player.YCoord && f.XCoord == player.XCoord)
+                {
+                    Battle.Intentional = false;
                     return true;
+                }
                 else
-                        return false;
+                    return false;
             }
             else
                 return false;
         } 
 
+        //Move both player and enemy
         public String Walk(Fighter f, String dir)
         {
             //move = Console.In.ReadLine();
@@ -181,12 +215,9 @@ namespace RPG_Sim
                 if (dir.Equals("t"))
                     Tips();
             }           
-                    
-            DrawMap();
-            return "";
-
-
+                return "";
         }
+
         //return index of fighter player is on
         //0 means no fighter found
         public int CheckForBattle()
@@ -213,23 +244,23 @@ namespace RPG_Sim
         private int _defStat;
         */
         //Only called when player is on an enemy
-        public void DisplayStat(int index)
+        public Fighter DisplayStat(Fighter f)
         {
-            Fighter player = Fighters[0];
-            Fighter enemy =  Fighters[index];
+                Fighter player = Fighters[0];
+                Fighter enemy = f;
 
-            Console.WriteLine("          <---" + player.Name + " VS " + enemy.Name + "--->");
-            Console.WriteLine("___________________________________________");
-            Console.WriteLine("Level:   " + player.Level + "|" + enemy.Level);
-            Console.WriteLine("HP:      " + player.Hp + "|" + enemy.Hp);
-            Console.WriteLine("Weapon:  " + player.Weapon.Name + "|" + enemy.Weapon.Name);
-            Console.WriteLine("Attack:  " + player.AtkStat + "|" + enemy.AtkStat);
-            Console.WriteLine("Defense: " + player.DefStat + "|" + enemy.DefStat);
+                Console.WriteLine("          <---" + player.Name + " VS " + enemy.Name + "--->");
+                Console.WriteLine("___________________________________________");
+                Console.WriteLine("Level:   " + player.Level + "|" + enemy.Level);
+                Console.WriteLine("HP:      " + player.Hp + "|" + enemy.Hp);
+                Console.WriteLine("Weapon:  " + player.Weapon.Name + "|" + enemy.Weapon.Name);
+                Console.WriteLine("Attack:  " + player.AtkStat + "|" + enemy.AtkStat);
+                Console.WriteLine("Defense: " + player.DefStat + "|" + enemy.DefStat);
+                Console.WriteLine();
+            
+            return f;
         }
 
-        public Fighter[] StartBattle()
-        {
-            throw new NotImplementedException();
-        }       
+      
     }
 }

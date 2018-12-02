@@ -6,17 +6,93 @@ namespace RPG_Sim
 {
     public class Battle
     {
-        Fighter _offense;
-        Fighter _defense;
+        private static bool _intentional;
 
-        public void Attack(Fighter off, Fighter def)
+        public static void Attack(Fighter off, Fighter def)
         {
-            throw new NotImplementedException();
+            double amt = 0;
+            Random rando = new Random();
+            double chance;
+            bool critHit = false;
+            bool miss = false;
+            
+            //Offence damage
+            amt = off.AtkStat + off.Weapon.Dmg;
+
+            chance = rando.Next(100) + 1;
+            if (off.Weapon.CritChance >= chance )
+            {
+                critHit = true;
+                amt += off.Weapon.Dmg;
+            }
+
+            //Defense blocked
+            amt -= def.DefStat;
+            if(off.Weapon.Type.Equals("p"))
+            {
+                Physical p = (Physical) off.Weapon;
+                amt -= p.Dmg * p.Sharpness;
+                
+                p.DullWeapon(p);
+            }
+            if (off.Weapon.Type.Equals("m"))
+            {
+                chance = rando.Next(100) + 1;
+                Magic m = (Magic) off.Weapon;
+                Console.Out.WriteLine(chance);
+                Console.Out.WriteLine(m.Accuracy);
+                if (chance >= m.Accuracy)
+                {
+                    amt = 0;
+                    miss = true;
+                }
+            }
+
+            def.Hp -= amt;
+
+            // Console.WriteLine(off.Weapon.Dmg);
+            if (!miss)
+                Console.Out.WriteLine(off.Name + " " + off.Weapon.Verb + " " + def.Name + " for " + amt + " damage!");
+            else
+                Console.WriteLine(off.Name + " Missed!" );
+
+            if (critHit)
+                Console.WriteLine("It was a Critical Hit!");
+            
+            Console.ReadLine();
+            
         }
 
-        public void NewMethod()
+        public static void InitiateBattle(String pName, String eName)
         {
-            throw new NotImplementedException();
+            Console.Clear();
+            if (Intentional == false)
+                Console.Out.WriteLine(pName + " stepped on " + eName + " and it attacked anyway!!!");
+            else
+                Console.Out.WriteLine(pName + " Challenged " + eName + " to a fight!!!");
+            Console.Out.WriteLine("Battle!");
+            Console.ReadLine();
+        }
+
+        public static bool StealWeapon(Fighter f)
+        {
+            String choice = "";
+            while (!(choice.Equals("y") || choice.Equals("n"))){
+
+
+                Console.WriteLine("Would you like to steal " + f.Name + "'s " + f.Weapon.Name + "? (y/n)");
+                choice = Console.ReadLine();
+            }
+            if (choice.Equals("y"))
+                return true;
+            else
+                return false;
+        }
+
+        public static bool Intentional
+        {
+            get { return _intentional;  }
+            set { _intentional = value; }
         }
     }
 }

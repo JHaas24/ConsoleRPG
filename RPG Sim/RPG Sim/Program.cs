@@ -17,10 +17,6 @@ namespace RPG_Sim
             //Declare Overworld
             Overworld world = new Overworld(16);
 
-            //Declare battle instance
-            Battle battle = new Battle();//may be static
-
-
             //Weapons
             Magic wand = new Magic(90, "Wand", "Zapped", 100, 90, "m");
             Physical stick = new Physical("stick", "wacked", 80, 99, "p");
@@ -28,16 +24,20 @@ namespace RPG_Sim
             Physical godTounge = new Physical("God Tounge", "S L U R P E D", 500, 60, "p");
             Physical pickaxe = new Physical("Pickaxe", "whacked", 20, 10, "p");
 
-            Magic Rocket = new Magic(100, "Rocket Barrage", "Nuked", 600, 30, "m");
+            Magic experience = new Magic(50, "Experience", "rejected", 50, 30, "m");
+            Magic rocket = new Magic(100, "Rocket Barrage", "Nuked", 600, 30, "m");
+            Magic guillotine = new Magic(1, "Guillotine", "Decapactated", 9000000, 100, "m");
            
             //Fighters
-            Fighter player = new Fighter("", 1000, 1, new Weapon(), 20, 10, "", 0, 0);
+            Fighter player = new Fighter("", 1000, 1, new Weapon(), 20, 10, 0, "", 0, 0);
 
-            Fighter e1 = new Fighter("Generic Wizzard", 600, 1, wand, 20, 10, "(WIZ)", 5, 6);          
-            Fighter e3 = new Fighter("Default Skin" , 1000, 4, pickaxe, 20, 10, "dance", 5, 1);
+            Fighter e1 = new Fighter("Generic Wizzard", 600, 1, wand, 20, 10, 1, "(WIZ)", 5, 6);          
+            Fighter e3 = new Fighter("Default Skin" , 1000, 4, pickaxe, 20, 10, 3, "dace", 5, 1);
+            Fighter e5 = new Fighter("Employeer", 3000, 7, experience, 30, 3, 52, "(-_-)", 7, 8);
+            Fighter e6 = new Fighter("Metal Woman", 100000, 9, guillotine, 1000, 0, 9, "[]M[]", 2, 12);
 
-            Fighter e2 = new Fighter("Buff Pharah", 100000, 15, Rocket, 100, 100, "Rockt", 7, 9);
-            Fighter e4 = new Fighter("Ghirahim", 50000, 18, godTounge, 300, 5, "GHIRA", 10, 10);
+            Fighter e2 = new Fighter("Buff Pharah", 100000, 15, rocket, 100, 100, 8, "Rockt", 7, 9);
+            Fighter e4 = new Fighter("Ghirahim", 50000, 18, godTounge, 300, 5, 10, "GHIRA", 10, 10);
 
             //initialize componants
             //index 0 is player
@@ -49,6 +49,8 @@ namespace RPG_Sim
                 world.Fighters[2] = e2;
                 world.Fighters[3] = e3;
                 world.Fighters[4] = e4;
+                world.Fighters[5] = e5;
+                world.Fighters[6] = e6;
             }
             // Fighter.Fighters[i] = e4;
             // Fighter.Fighters[i] = e5;
@@ -98,14 +100,19 @@ namespace RPG_Sim
                         Console.WriteLine("Would you like to challenge " + world.Fighters[i].Name + "? (y or n)");
                         start = Console.ReadLine();
                         
+                        //Start Battle
                         if (start.Equals("y") || Battle.Intentional == false)
                         {
                             Battle.InitiateBattle(player.Name, world.Fighters[i].Name);
                             while (player.Hp > 0 && world.Fighters[i].Hp > 0)
                             {
-                                Console.WriteLine(player.Name + " HP: " + player.Hp);
-                                Console.WriteLine(world.Fighters[i].Name + " HP: " + world.Fighters[i].Hp);
-                                Console.ReadLine();
+                                Console.Clear();
+                                if (!Battle.Auto.Equals("auto"))
+                                {
+                                    Console.WriteLine(player.Name + " HP: " + player.Hp);
+                                    Console.WriteLine(world.Fighters[i].Name + " HP: " + world.Fighters[i].Hp);
+                                    Battle.Auto = Console.ReadLine();
+                                }
                                 Battle.Attack(player, world.Fighters[i]);
                                 if (player.Hp < 0 || world.Fighters[i].Hp < 0)
                                     break; 
@@ -123,19 +130,21 @@ namespace RPG_Sim
                             else
                             {
                                 Console.WriteLine(player.Name + " Defeated " + world.Fighters[i].Name + "!");
-                                Console.WriteLine(player.Name + " Leveled up!");
+                                Console.WriteLine(player.Name + " Leveled up" + world.Fighters[i].Bounty + "times!");
                                 Console.WriteLine(player.Name + "'s Stats increased!");
-                                player.Levelup();
+                                player.Levelup(world.Fighters[i].Bounty);
                                 bool steal = Battle.StealWeapon(world.Fighters[i]);
                                 if (steal)
                                 {
                                     player.Weapon = world.Fighters[i].Weapon;
                                 }
                             }
+                            //reset stats and move enemy away
                             player.Hp = player.MaxHp;
                             world.Fighters[i].Hp = world.Fighters[i].MaxHp;
                             world.Fighters[i].XCoord = world.MapSize - 1;
                             world.Fighters[i].YCoord = 0;
+                            Battle.Auto = "";
                         }
                         else
                         {

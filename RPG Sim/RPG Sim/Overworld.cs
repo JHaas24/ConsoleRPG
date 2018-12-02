@@ -8,7 +8,7 @@ namespace RPG_Sim
     {
         private int _mapSize;
         private String[,] _map;
-        private int _numOfFighters = 5;
+        private int _numOfFighters = 7;
         public Fighter[] _fighters;
        
         
@@ -71,7 +71,6 @@ namespace RPG_Sim
                 Console.WriteLine("3: Toungue");
                 Console.WriteLine("(send 1, 2, or 3...)");
                 choice = Console.ReadLine();
-                Console.WriteLine(choice);
             }
             
 
@@ -249,18 +248,17 @@ namespace RPG_Sim
                 Fighter player = Fighters[0];
                 Fighter enemy = f;
 
-                Console.WriteLine("          <---" + player.Name + " VS " + enemy.Name + "--->");
+                Console.WriteLine("<---" + player.Name + " VS " + enemy.Name + "--->");
                 Console.WriteLine("___________________________________________");
                 Console.WriteLine("Level:   " + player.Level + "|" + enemy.Level);
                 Console.WriteLine("HP:      " + player.Hp + "|" + enemy.Hp);
                 Console.WriteLine("Weapon:  " + player.Weapon.Name + "|" + enemy.Weapon.Name);
                 Console.WriteLine("Attack:  " + player.AtkStat + "|" + enemy.AtkStat);
                 Console.WriteLine("Defense: " + player.DefStat + "|" + enemy.DefStat);
+                Console.WriteLine("Bounty: " + enemy.Bounty);
                 Console.WriteLine();
             
             return f;
-        }
-
-      
+        }     
     }
 }

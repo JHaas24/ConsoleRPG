@@ -14,6 +14,7 @@ namespace RPG_Sim
         private double _atkStat;
         private double _defStat;
         private String _icon;
+        private int _bounty;
 
         private int _xCoord = -1;
         private int _yCoord = -1;
@@ -26,7 +27,7 @@ namespace RPG_Sim
         {
 
         }
-        public Fighter(String name, int maxHp, int level, Weapon weapon, int attStat, int defStat, String icon, int xCoord, int yCoord)
+        public Fighter(String name, int maxHp, int level, Weapon weapon, int attStat, int defStat, int bounty, String icon, int xCoord, int yCoord)
         {
             this._name = name;
             this._maxHp = maxHp;
@@ -34,6 +35,7 @@ namespace RPG_Sim
             this._weapon = weapon;
             this._atkStat = attStat;
             this._defStat = defStat;
+            this._bounty = bounty;
             this._icon = icon;
             this._xCoord = xCoord;
             this._yCoord = yCoord;
@@ -42,12 +44,12 @@ namespace RPG_Sim
 
         
 
-        public void Levelup()
+        public void Levelup(int times)
         {
-            this.Level++;
-            this.AtkStat *= 1.2;
-            this.DefStat *= 1.2;
-            this.MaxHp *= 1.2;
+            this.Level += times;
+            this.AtkStat *= .2 * times + 1;
+            this.DefStat *= .2 * times + 1;
+            this.MaxHp *= .2 * times + 1;
 
         }
         public void LevelDown()
@@ -64,6 +66,12 @@ namespace RPG_Sim
             Console.WriteLine("Fighter Information:");
             Console.WriteLine("Fighter Information:");
             Console.WriteLine("Fighter Information:");
+        }
+        
+        public int Bounty
+        {
+            get { return _bounty; }
+            set { _bounty = value; }
         }
 
         public double MaxHp

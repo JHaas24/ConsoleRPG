@@ -53,10 +53,10 @@ namespace RPG_Sim
         //Display greeting message and player initialization
         public String Welcome()
         {
-            Console.Out.WriteLine("Welcome to Kindom Royale!!! Press Enter");
+            Console.Out.WriteLine("Welcome to Bread Battle Royale!!! Press Enter");
             Console.ReadLine();
             Console.Out.WriteLine("You and several others have been randomly selected by the North Korean government to participate in a Battle Royale");
-            Console.Out.WriteLine("The first participant to defeat all others will win North Korea");
+            Console.Out.WriteLine("The first participant to defeat all others will win a loaf of bread!!!");
             Console.Out.WriteLine("Prey on the weak and level up before taking on greater enemies");
             Console.ReadLine();
             Console.Out.WriteLine("Time to get started");

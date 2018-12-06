@@ -132,7 +132,7 @@ namespace RPG_Sim
                             else
                             {
                                 Console.WriteLine(player.Name + " Defeated " + world.Fighters[i].Name + "!");
-                                Console.WriteLine(player.Name + " Leveled up" + world.Fighters[i].Bounty + "times!");
+                                Console.WriteLine(player.Name + " Leveled up " + world.Fighters[i].Bounty + " times!");
                                 Console.WriteLine(player.Name + "'s Stats increased!");
                                 player.Levelup(world.Fighters[i].Bounty);
                                 bool steal = Battle.StealWeapon(world.Fighters[i]);

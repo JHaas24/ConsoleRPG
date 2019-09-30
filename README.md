@@ -1,2 +1,2 @@
 # ConsoleRPG
-Project for Object Oriented CSC 260
+Final Project for Object Oriented CSC 260
